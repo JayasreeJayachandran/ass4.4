@@ -1,12 +1,25 @@
-1.DFSInputStream:
 1.FSDataInputStream
-              >Provides stream (channel) for reading data.
+              >Provides stream  for reading data.
+              >Initially when client invokes open() method,the namenode returns the metadata with FSDatainputStream
+              >It contains the DFSInputStream to which the client send the read() signals.
 2.DFSInputStream
               >Handles communication of the namenode with various datanodes.
+              >this reads the data from the datanodes when client sends a read() signal
+              >this is repeated until the client sends a close() signal.
               >Handles integrity of data contained by the blocks.
               >Manages data read activity in case of datanode failure.
               >Called internally by FSDataInputStream.
+3.FSDataOutputStream
+             > Provides stream (channel) for writing data.
+             >Initially when client invokes create() method,the namenode checks the existency of the file and returns the 
+             new location for the file or if it already existing ,it returns an IOException.
+             >This inturn helps the client by providing DFSOutputStream that helps to write the file on hdfs.
+4.DFSOutputStream
+             > Handles communication of the namenode with various datanodes.
+             >this create packets  using the data and store it in the ack queue
+             >it performs replication by filing the datanode pipelines
+             >even in case of failure in writing ,it informs the name node and reinitiates the writing process with the new location.
+             > Called internally by FSDataOutputStream.
 
-2.DFSOutputStream
-3.FSDataInputStream
-4.FSDataOutputStream
+
+
