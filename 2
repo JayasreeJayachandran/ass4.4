@@ -1,5 +1,12 @@
 1.DFSInputStream:
-            >
+1.FSDataInputStream
+              >Provides stream (channel) for reading data.
+2.DFSInputStream
+              >Handles communication of the namenode with various datanodes.
+              >Handles integrity of data contained by the blocks.
+              >Manages data read activity in case of datanode failure.
+              >Called internally by FSDataInputStream.
+
 2.DFSOutputStream
 3.FSDataInputStream
 4.FSDataOutputStream
